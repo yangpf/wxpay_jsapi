@@ -8,14 +8,12 @@ package com.unstoppedable.common;
  */
 public class Configure {
 
-	//sdk的版本号
-	private static final String sdkVersion = "java sdk 1.0.1";
 
 //这个就是自己要保管好的私有Key了（切记只能放在自己的后台代码里，不能放在任何可能被看到源代码的客户端程序中）
 	// 每次自己Post数据给API的时候都要用这个key来对所有字段进行签名，生成的签名会放在Sign这个字段，API收到Post数据的时候也会用同样的签名算法对Post过来的数据进行签名和验证
 	// 收到API的返回的时候也要用这个key来对返回的数据算下签名，跟API的Sign数据进行比较，如果值不一致，有可能数据被第三方给篡改
 
-	private static String key = "b754c6010d72a26193fc710a8a062a8f";
+	private static String key = "";
 
 	//微信分配的公众号ID（开通公众号之后可以获取到）
 	private static String appID = "";
@@ -29,10 +27,10 @@ public class Configure {
 	private static String subMchID = "";
 
 	//HTTPS证书的本地路径
-	private static String certLocalPath = "E:\\workspace\\yissmobile\\src\\main\\resources\\payment\\wxpay\\apiclient_cert.p12";
+	private static String certLocalPath = "";
 
 	//HTTPS证书密码，默认密码等于商户号MCHID
-	private static String certPassword = "1258992301";
+	private static String certPassword = "";
 
 	//是否使用异步线程的方式来上报API测速，默认为异步模式
 	private static boolean useThreadToDoReport = true;
