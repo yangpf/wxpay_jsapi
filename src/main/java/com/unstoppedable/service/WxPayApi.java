@@ -39,7 +39,6 @@ public class WxPayApi {
         if (resultMap.get("openid") == null) {
             return null;
         }
-        ;
 
         return resultMap.get("openid").toString();
     }

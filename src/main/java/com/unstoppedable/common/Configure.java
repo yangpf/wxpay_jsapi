@@ -140,8 +140,6 @@ public class Configure {
 		HttpsRequestClassName = name;
 	}
 
-	public static String getSdkVersion(){
-		return sdkVersion;
-	}
+
 
 }
