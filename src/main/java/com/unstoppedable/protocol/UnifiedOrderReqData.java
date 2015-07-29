@@ -1,7 +1,6 @@
 package com.unstoppedable.protocol;
 
 
-
 import com.unstoppedable.common.Configure;
 import com.unstoppedable.common.HttpService;
 import com.unstoppedable.common.RandomStringGenerator;
@@ -58,85 +57,84 @@ public class UnifiedOrderReqData {
         this.sign = Signature.getSign(toMap());
     }
 
-
-    public void setAppid(String appid) {
-        this.appid = appid;
+    public String getAppid() {
+        return appid;
     }
 
-    public void setMch_id(String mch_id) {
-        this.mch_id = mch_id;
+    public String getMch_id() {
+        return mch_id;
     }
 
-    public void setDevice_info(String device_info) {
-        this.device_info = device_info;
+    public String getDevice_info() {
+        return device_info;
     }
 
-    public void setNonce_str(String nonce_str) {
-        this.nonce_str = nonce_str;
+    public String getNonce_str() {
+        return nonce_str;
     }
 
-    public void setSign(String sign) {
-        this.sign = sign;
+    public String getSign() {
+        return sign;
     }
 
-    public void setBody(String body) {
-        this.body = body;
+    public String getBody() {
+        return body;
     }
 
-    public void setDetail(String detail) {
-        this.detail = detail;
+    public String getDetail() {
+        return detail;
     }
 
-    public void setAttach(String attach) {
-        this.attach = attach;
+    public String getAttach() {
+        return attach;
     }
 
-    public void setOut_trade_no(String out_trade_no) {
-        this.out_trade_no = out_trade_no;
+    public String getOut_trade_no() {
+        return out_trade_no;
     }
 
-    public void setFee_type(String fee_type) {
-        this.fee_type = fee_type;
+    public String getFee_type() {
+        return fee_type;
     }
 
-    public void setTotal_fee(int total_fee) {
-        this.total_fee = total_fee;
+    public int getTotal_fee() {
+        return total_fee;
     }
 
-    public void setSpbill_create_ip(String spbill_create_ip) {
-        this.spbill_create_ip = spbill_create_ip;
+    public String getSpbill_create_ip() {
+        return spbill_create_ip;
     }
 
-    public void setTime_start(String time_start) {
-        this.time_start = time_start;
+    public String getTime_start() {
+        return time_start;
     }
 
-    public void setTime_expire(String time_expire) {
-        this.time_expire = time_expire;
+    public String getTime_expire() {
+        return time_expire;
     }
 
-    public void setGoods_tag(String goods_tag) {
-        this.goods_tag = goods_tag;
+    public String getGoods_tag() {
+        return goods_tag;
     }
 
-    public void setNotify_url(String notify_url) {
-        this.notify_url = notify_url;
+    public String getNotify_url() {
+        return notify_url;
     }
 
-    public void setTrade_type(String trade_type) {
-        this.trade_type = trade_type;
+    public String getTrade_type() {
+        return trade_type;
     }
 
-    public void setProduct_id(String product_id) {
-        this.product_id = product_id;
+    public String getProduct_id() {
+        return product_id;
     }
 
-    public void setLimit_pay(String limit_pay) {
-        this.limit_pay = limit_pay;
+    public String getLimit_pay() {
+        return limit_pay;
     }
 
-    public void setOpenid(String openid) {
-        this.openid = openid;
+    public String getOpenid() {
+        return openid;
     }
 
     public Map<String, Object> toMap() {
@@ -178,6 +176,24 @@ public class UnifiedOrderReqData {
         private String product_id;
         private String limit_pay;
         private String openid;
+
+        /**
+         * 使用配置中的 appid 和  mch_id
+         *
+         * @param body
+         * @param out_trade_no
+         * @param total_fee
+         * @param spbill_create_ip
+         * @param notify_url
+         * @param trade_type
+         */
+        public UnifiedOrderReqDataBuilder(String body, String out_trade_no, Integer total_fee,
+                                          String spbill_create_ip, String notify_url, String trade_type) {
+
+            this(Configure.getAppid(), Configure.getMchid(), body, out_trade_no, total_fee,
+                    spbill_create_ip, notify_url, trade_type);
+
+        }
 
         public UnifiedOrderReqDataBuilder(String appid, String mch_id, String body, String out_trade_no, Integer total_fee,
                                           String spbill_create_ip, String notify_url, String trade_type) {
@@ -268,16 +284,15 @@ public class UnifiedOrderReqData {
 
         public UnifiedOrderReqData build() {
 
-            if("JSAPI".equals(this.trade_type) && this.openid == null) {
+            if ("JSAPI".equals(this.trade_type) && this.openid == null) {
                 throw new IllegalArgumentException("当传入trade_type为JSAPI时，openid为必填参数");
             }
-            if("NATIVE".equals(this.trade_type) && this.product_id == null) {
+            if ("NATIVE".equals(this.trade_type) && this.product_id == null) {
                 throw new IllegalArgumentException("当传入trade_type为NATIVE时，product_id为必填参数");
             }
             return new UnifiedOrderReqData(this);
         }
     }
-
 
 
 }
