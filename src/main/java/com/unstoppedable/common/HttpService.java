@@ -118,9 +118,7 @@ public class HttpService {
 
         HttpPost httpPost = new HttpPost(url);
 
-        XStream xStreamForRequestPostData = new XStream(new DomDriver("UTF-8", new XmlFriendlyNameCoder("-_", "_")));
-
-        String postDataXML = xStreamForRequestPostData.toXML(object2Xml);
+        String postDataXML = XMLParser.toXML(object2Xml);
 
         logger.info("API POST DATA:");
         logger.info(postDataXML);
