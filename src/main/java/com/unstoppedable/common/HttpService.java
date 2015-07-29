@@ -1,8 +1,6 @@
 package com.unstoppedable.common;
 
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.xml.DomDriver;
-import com.thoughtworks.xstream.io.xml.XmlFriendlyNameCoder;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpEntity;
@@ -29,7 +27,7 @@ import java.net.SocketTimeoutException;
 import java.security.KeyStore;
 
 /**
- * HttpService 初始化需要
+ * HttpService 初始化需要在Configure指定密钥的为止，以及密码
  * Created by hupeng on 2015/7/28.
  */
 public class HttpService {
