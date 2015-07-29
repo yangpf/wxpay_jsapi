@@ -1,8 +1,8 @@
 package com.unstoppedable.protocol;
 
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.unstoppedable.common.Configure;
-import com.unstoppedable.common.HttpService;
 import com.unstoppedable.common.RandomStringGenerator;
 import com.unstoppedable.common.Signature;
 
@@ -10,7 +10,7 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
-
+@XStreamAlias("xml")
 public class UnifiedOrderReqData {
 
     private String appid;

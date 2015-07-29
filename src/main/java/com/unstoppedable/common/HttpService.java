@@ -29,6 +29,7 @@ import java.net.SocketTimeoutException;
 import java.security.KeyStore;
 
 /**
+ * HttpService åˆå§‹åŒ–éœ€è¦
  * Created by hupeng on 2015/7/28.
  */
 public class HttpService {
@@ -36,10 +37,8 @@ public class HttpService {
 
     private static CloseableHttpClient httpClient = buildHttpClient();
 
-    //Á¬½Ó³¬Ê±Ê±¼ä£¬Ä¬ÈÏ10Ãë
     private static int socketTimeout = 5000;
 
-    //´«Êä³¬Ê±Ê±¼ä£¬Ä¬ÈÏ30Ãë
     private static int connectTimeout = 5000;
 
     private static int requestTimeout = 5000;
@@ -48,9 +47,9 @@ public class HttpService {
 
         try {
             KeyStore keyStore = KeyStore.getInstance("PKCS12");
-            FileInputStream instream = new FileInputStream(new File(Configure.getCertLocalPath()));//¼ÓÔØ±¾µØµÄÖ¤Êé½øĞĞhttps¼ÓÃÜ´«Êä
+            FileInputStream instream = new FileInputStream(new File(Configure.getCertLocalPath()));
             try {
-                keyStore.load(instream, Configure.getCertPassword().toCharArray());//ÉèÖÃÖ¤ÊéÃÜÂë
+                keyStore.load(instream, Configure.getCertPassword().toCharArray());
             } finally {
                 instream.close();
             }
@@ -82,7 +81,6 @@ public class HttpService {
             throw new RuntimeException("error create httpclient......", e);
         }
     }
-
 
 
     public static String doGet(String requestUrl) throws Exception {
@@ -120,21 +118,16 @@ public class HttpService {
 
         HttpPost httpPost = new HttpPost(url);
 
-        //½â¾öXStream¶Ô³öÏÖË«ÏÂ»®ÏßµÄbug
         XStream xStreamForRequestPostData = new XStream(new DomDriver("UTF-8", new XmlFriendlyNameCoder("-_", "_")));
 
-        //½«ÒªÌá½»¸øAPIµÄÊı¾İ¶ÔÏó×ª»»³ÉXML¸ñÊ½Êı¾İPost¸øAPI
         String postDataXML = xStreamForRequestPostData.toXML(object2Xml);
 
-        logger.info("API£¬POST¹ıÈ¥µÄÊı¾İÊÇ£º");
+        logger.info("API POST DATA:");
         logger.info(postDataXML);
 
-        //µÃÖ¸Ã÷Ê¹ÓÃUTF-8±àÂë£¬·ñÔòµ½API·şÎñÆ÷XMLµÄÖĞÎÄ²»ÄÜ±»³É¹¦Ê¶±ğ
         StringEntity postEntity = new StringEntity(postDataXML, "UTF-8");
         httpPost.addHeader("Content-Type", "text/xml");
         httpPost.setEntity(postEntity);
-
-        //ÉèÖÃÇëÇóÆ÷µÄÅäÖÃ
 
         logger.info("executing request" + httpPost.getRequestLine());
 
@@ -158,7 +151,7 @@ public class HttpService {
             logger.error("http get throw Exception", e);
 
         } finally {
-            httpPost.abort();
+            httpPost.releaseConnection();
         }
 
         return result;
